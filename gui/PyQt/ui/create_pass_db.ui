@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>Utwórz bazę haseł</string>
   </property>
-  <widget class="QPushButton" name="pushButton">
+  <widget class="QPushButton" name="ok_button">
    <property name="geometry">
     <rect>
      <x>240</x>
@@ -26,7 +26,7 @@
     <string>OK</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lineEdit">
+  <widget class="QLineEdit" name="master_password_input">
    <property name="geometry">
     <rect>
      <x>22</x>
@@ -36,7 +36,7 @@
     </rect>
    </property>
   </widget>
-  <widget class="QLabel" name="label">
+  <widget class="QLabel" name="master_password_label">
    <property name="geometry">
     <rect>
      <x>30</x>

@@ -2,7 +2,11 @@ import sys
 
 from PyQt6 import uic
 from PyQt6.QtGui import QAction
-from PyQt6.QtWidgets import QApplication, QMainWindow, QWidget, QDialog
+from PyQt6.QtWidgets import QApplication, QMainWindow
+
+from widgets.AboutAppDialog import AboutAppDialog
+from widgets.CreatePassDBDialog import CreatePassDBDialog
+from widgets.OpenPassDBDialog import OpenPassDBDialog
 
 
 class MyMainWindow(QMainWindow):
@@ -21,16 +25,13 @@ class MyMainWindow(QMainWindow):
         self.actionClose.triggered.connect(self.close)
 
         # About app dialog
-        self.about_app_dialog = QDialog(self)
-        uic.loadUi("ui/about_application.ui", self.about_app_dialog)
+        self.about_app_dialog = AboutAppDialog()
 
         # Create db dialog
-        self.create_pass_db_dialog = QDialog(self)
-        uic.loadUi("ui/create_pass_db.ui", self.create_pass_db_dialog)
+        self.create_pass_db_dialog = CreatePassDBDialog()
 
         # Open db dialog
-        self.open_pass_db_dialog = QDialog(self)
-        uic.loadUi("ui/open_pass_db.ui", self.open_pass_db_dialog)
+        self.open_pass_db_dialog = OpenPassDBDialog()
 
 
     def on_about_app_clicked(self):
