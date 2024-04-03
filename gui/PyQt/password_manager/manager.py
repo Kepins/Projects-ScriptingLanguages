@@ -98,3 +98,28 @@ class ManagerFactory:
         encrypted = encrypt_data(master_password, manager_serialized.encode("UTF-8"))
         with open(file_path, "wb") as file:
             file.write(encrypted)
+
+
+class AutoSavingPasswordManager:
+    def __init__(self, manager: Manager, file_path: str, master_password: str) -> None:
+        self.manager = manager
+        self.file_path = file_path
+        self.master_password = master_password
+
+        ManagerFactory.to_file(manager=self.manager, file_path=self.file_path, master_password=self.master_password)
+
+    @property
+    def passwords(self):
+        return self.manager.passwords
+
+    def add_password_entry(self, password_entry: AddUpdatePasswordEntry) -> None:
+        self.manager.add_password_entry(password_entry)
+        ManagerFactory.to_file(manager=self.manager, file_path=self.file_path, master_password=self.master_password)
+
+    def update_password_entry(self, id: int, password_entry: AddUpdatePasswordEntry) -> None:
+        self.manager.update_password_entry(id, password_entry)
+        ManagerFactory.to_file(manager=self.manager, file_path=self.file_path, master_password=self.master_password)
+
+    def remove_password_entry(self, id: int) -> None:
+        self.manager.remove_password_entry(id)
+        ManagerFactory.to_file(manager=self.manager, file_path=self.file_path, master_password=self.master_password)
