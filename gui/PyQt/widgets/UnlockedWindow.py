@@ -1,6 +1,6 @@
 from PyQt6 import uic
 from PyQt6.QtGui import QAction
-from PyQt6.QtWidgets import QMainWindow
+from PyQt6.QtWidgets import QMainWindow, QTableView, QHeaderView, QTableWidget, QTableWidgetItem
 
 from password_manager.manager import AutoSavingPasswordManager
 from widgets.AboutAppDialog import AboutAppDialog
@@ -9,6 +9,12 @@ from widgets.OpenPassDBDialog import OpenPassDBDialog
 
 
 class UnlockedWindow(QMainWindow):
+    tableWidget: QTableWidget
+    actionNew: QAction
+    actionOpen: QAction
+    actionLock: QAction
+    actionClose: QAction
+
     def __init__(self, welcome_screen: QMainWindow, auto_saving_manager: AutoSavingPasswordManager):
         super().__init__()
         # Load the .ui file
@@ -28,9 +34,21 @@ class UnlockedWindow(QMainWindow):
         self.actionLock.triggered.connect(self.on_lock_pressed)
         self.actionClose.triggered.connect(self.on_close_app_pressed)
 
-
         # About app dialog
         self.about_app_dialog = AboutAppDialog()
+
+        # Init column view
+        self.tableWidget.setEditTriggers(QTableWidget.EditTrigger.NoEditTriggers)
+        self.tableWidget.setColumnCount(2)
+        self.tableWidget.setHorizontalHeaderLabels(["Nazwa", "Ostatnio użyto"])
+
+        self.row_to_id = {}
+        for i, password_id in enumerate(self.auto_saving_manager.passwords):
+            password_entry = self.auto_saving_manager.passwords[password_id]
+            self.row_to_id[i] = password_id
+            self.tableWidget.insertRow(i)
+            self.tableWidget.setItem(i, 0, QTableWidgetItem(password_entry.name))
+            self.tableWidget.setItem(i, 1, QTableWidgetItem(password_entry.last_used_time.strftime("%d.%m.%Y")))
 
     def on_create_pass_db_pressed(self):
         print("Create pass db button clicked")

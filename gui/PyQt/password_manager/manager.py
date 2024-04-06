@@ -109,7 +109,7 @@ class AutoSavingPasswordManager:
         ManagerFactory.to_file(manager=self.manager, file_path=self.file_path, master_password=self.master_password)
 
     @property
-    def passwords(self):
+    def passwords(self) -> dict[int, PasswordEntry]:
         return self.manager.passwords
 
     def add_password_entry(self, password_entry: AddUpdatePasswordEntry) -> None:
