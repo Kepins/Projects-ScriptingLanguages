@@ -6,6 +6,7 @@ from password_manager.manager import AutoSavingPasswordManager
 from widgets.AboutAppDialog import AboutAppDialog
 from widgets.CreatePassDBDialog import CreatePassDBDialog
 from widgets.OpenPassDBDialog import OpenPassDBDialog
+from widgets.AddPasswordDialog import AddPasswordDialog
 
 
 class UnlockedWindow(QMainWindow):
@@ -49,6 +50,13 @@ class UnlockedWindow(QMainWindow):
             self.tableWidget.insertRow(i)
             self.tableWidget.setItem(i, 0, QTableWidgetItem(password_entry.name))
             self.tableWidget.setItem(i, 1, QTableWidgetItem(password_entry.last_used_time.strftime("%d.%m.%Y")))
+
+    def on_add_button_pressed(self):
+        print("Add password entry button clicked")
+        password_dialog = AddPasswordDialog()
+        password_dialog.exec()
+
+        print(password_dialog.addUpdatePasswordEntry)
 
     def on_create_pass_db_pressed(self):
         print("Create pass db button clicked")
