@@ -123,3 +123,7 @@ class AutoSavingPasswordManager:
     def remove_password_entry(self, id: int) -> None:
         self.manager.remove_password_entry(id)
         ManagerFactory.to_file(manager=self.manager, file_path=self.file_path, master_password=self.master_password)
+
+    def change_master_password(self, new_master_password: str) -> None:
+        self.master_password = new_master_password
+        ManagerFactory.to_file(manager=self.manager, file_path=self.file_path, master_password=self.master_password)

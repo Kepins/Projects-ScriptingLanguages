@@ -1,10 +1,12 @@
 from PyQt6 import uic
 from PyQt6.QtGui import QAction
-from PyQt6.QtWidgets import QMainWindow, QHeaderView, QTableWidget, QTableWidgetItem, QAbstractItemView
+from PyQt6.QtWidgets import QMainWindow, QHeaderView, QTableWidget, QTableWidgetItem, QAbstractItemView, QFileDialog
 
 from password_manager.manager import AutoSavingPasswordManager
 from widgets.AboutAppDialog import AboutAppDialog
+from widgets.ChangeMasterPasswordDialog import ChangeMasterPasswordDialog
 from widgets.CreatePassDBDialog import CreatePassDBDialog
+from widgets.ErrorDialog import ErrorDialog
 from widgets.OpenPassDBDialog import OpenPassDBDialog
 from widgets.AddPasswordDialog import AddPasswordDialog
 from widgets.PasswordDialog import PasswordDialog
@@ -14,6 +16,8 @@ class UnlockedWindow(QMainWindow):
     tableWidget: QTableWidget
     actionNew: QAction
     actionOpen: QAction
+    actionSaveAs: QAction
+    actionChangeMasterPassword: QAction
     actionLock: QAction
     actionClose: QAction
 
@@ -33,6 +37,8 @@ class UnlockedWindow(QMainWindow):
         # Connect actions in menu
         self.actionNew.triggered.connect(self.on_create_pass_db_pressed)
         self.actionOpen.triggered.connect(self.on_open_pass_db_pressed)
+        self.actionSaveAs.triggered.connect(self.on_save_as_pressed)
+        self.actionChangeMasterPassword.triggered.connect(self.on_change_master_password_pressed)
         self.actionLock.triggered.connect(self.on_lock_pressed)
         self.actionClose.triggered.connect(self.on_close_app_pressed)
 
@@ -127,6 +133,30 @@ class UnlockedWindow(QMainWindow):
             self.welcome_screen.new_window.show()
 
             self.close()
+
+    def on_save_as_pressed(self):
+        print("Save as button clicked")
+        file_path, _ = QFileDialog.getSaveFileName(self, "Wybierz Plik", "", "Wszystkie Pliki (*)")
+
+        if not file_path:
+            print("No file selected")
+            ErrorDialog(message="Nie wybrano pliku!").exec()
+            return
+
+        self.auto_saving_manager = AutoSavingPasswordManager(
+            manager=self.auto_saving_manager.manager,
+            file_path=file_path,
+            master_password=self.auto_saving_manager.master_password)
+
+    def on_change_master_password_pressed(self):
+        print("Change master password button clicked")
+        change_master_password_dialog = ChangeMasterPasswordDialog()
+        change_master_password_dialog.exec()
+
+        if change_master_password_dialog.new_master_password is not None:
+            self.auto_saving_manager.change_master_password(
+                new_master_password=change_master_password_dialog.new_master_password
+            )
 
     def on_lock_pressed(self):
         print("Lock button clicked")
