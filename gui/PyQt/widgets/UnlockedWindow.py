@@ -1,6 +1,6 @@
 from PyQt6 import uic
 from PyQt6.QtGui import QAction
-from PyQt6.QtWidgets import QMainWindow, QTableView, QHeaderView, QTableWidget, QTableWidgetItem
+from PyQt6.QtWidgets import QMainWindow, QTableView, QHeaderView, QTableWidget, QTableWidgetItem, QAbstractItemView
 
 from password_manager.manager import AutoSavingPasswordManager
 from widgets.AboutAppDialog import AboutAppDialog
@@ -39,9 +39,21 @@ class UnlockedWindow(QMainWindow):
         self.about_app_dialog = AboutAppDialog()
 
         # Init column view
+        self.tableWidget.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)  # Disable selection of individual cells
+        self.tableWidget.setSelectionMode(QAbstractItemView.SelectionMode.SingleSelection)
         self.tableWidget.setEditTriggers(QTableWidget.EditTrigger.NoEditTriggers)
         self.tableWidget.setColumnCount(2)
         self.tableWidget.setHorizontalHeaderLabels(["Nazwa", "Ostatnio użyto"])
+        for i, ratio in enumerate([0.6, 0.379]):
+            self.tableWidget.setColumnWidth(i, int(self.tableWidget.width() * ratio))
+
+        self.tableWidget.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Fixed)
+
+        self.reload_table_entries()
+
+    def reload_table_entries(self):
+        self.tableWidget.clearContents()
+        self.tableWidget.setRowCount(0)
 
         self.row_to_id = {}
         for i, password_id in enumerate(self.auto_saving_manager.passwords):
@@ -56,7 +68,16 @@ class UnlockedWindow(QMainWindow):
         password_dialog = AddPasswordDialog()
         password_dialog.exec()
 
-        print(password_dialog.addUpdatePasswordEntry)
+        self.auto_saving_manager.add_password_entry(password_dialog.add_update_password_entry)
+        self.reload_table_entries()
+
+    def on_remove_button_pressed(self):
+        print("Remove password entry button clicked")
+
+    def on_show_button_pressed(self):
+        print("Show password entry button clicked")
+
+
 
     def on_create_pass_db_pressed(self):
         print("Create pass db button clicked")

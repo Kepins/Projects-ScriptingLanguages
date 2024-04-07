@@ -14,7 +14,7 @@ class AddPasswordDialog(QDialog):
         super().__init__()
         loadUi("ui/add_password_dialog.ui", self)
 
-        self.addUpdatePasswordEntry = None
+        self.add_update_password_entry = None
 
     def on_add_button_pressed(self):
         print("Add button clicked")
@@ -26,6 +26,6 @@ class AddPasswordDialog(QDialog):
             ErrorDialog(message="Wypełnij wszystkie pola!").exec()
             return
 
-        self.addUpdatePasswordEntry = AddUpdatePasswordEntry(name=name, username=username, password=password)
+        self.add_update_password_entry = AddUpdatePasswordEntry(name=name, username=username, password=password)
         self.close()
 
