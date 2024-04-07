@@ -1,5 +1,3 @@
-from enum import Enum
-
 from PyQt6.QtWidgets import QDialog, QPushButton
 from PyQt6.uic import loadUi
 

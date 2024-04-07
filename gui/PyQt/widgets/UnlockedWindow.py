@@ -1,12 +1,13 @@
 from PyQt6 import uic
 from PyQt6.QtGui import QAction
-from PyQt6.QtWidgets import QMainWindow, QTableView, QHeaderView, QTableWidget, QTableWidgetItem, QAbstractItemView
+from PyQt6.QtWidgets import QMainWindow, QHeaderView, QTableWidget, QTableWidgetItem, QAbstractItemView
 
 from password_manager.manager import AutoSavingPasswordManager
 from widgets.AboutAppDialog import AboutAppDialog
 from widgets.CreatePassDBDialog import CreatePassDBDialog
 from widgets.OpenPassDBDialog import OpenPassDBDialog
 from widgets.AddPasswordDialog import AddPasswordDialog
+from widgets.PasswordDialog import PasswordDialog
 
 
 class UnlockedWindow(QMainWindow):
@@ -62,6 +63,7 @@ class UnlockedWindow(QMainWindow):
             self.tableWidget.insertRow(i)
             self.tableWidget.setItem(i, 0, QTableWidgetItem(password_entry.name))
             self.tableWidget.setItem(i, 1, QTableWidgetItem(password_entry.last_used_time.strftime("%d.%m.%Y")))
+        self.tableWidget.clearSelection()
 
     def on_add_button_pressed(self):
         print("Add password entry button clicked")
@@ -73,11 +75,30 @@ class UnlockedWindow(QMainWindow):
 
     def on_remove_button_pressed(self):
         print("Remove password entry button clicked")
+        selected_row_index = self.tableWidget.currentRow()
+        if selected_row_index == -1:
+            return
+        password_entry_id = self.row_to_id[selected_row_index]
+        self.auto_saving_manager.remove_password_entry(password_entry_id)
+        self.reload_table_entries()
 
     def on_show_button_pressed(self):
         print("Show password entry button clicked")
+        selected_row_index = self.tableWidget.currentRow()
+        if selected_row_index == -1:
+            return
+        password_entry_id = self.row_to_id[selected_row_index]
+        password_entry = self.auto_saving_manager.passwords[password_entry_id]
+        password_dialog = PasswordDialog(state=PasswordDialog.STATES.SHOWING, password_entry=password_entry)
+        password_dialog.exec()
 
+        if password_dialog.add_update_password_entry is not None:
+            self.auto_saving_manager.update_password_entry(
+                id=password_entry_id,
+                password_entry=password_dialog.add_update_password_entry
+            )
 
+        self.reload_table_entries()
 
     def on_create_pass_db_pressed(self):
         print("Create pass db button clicked")
@@ -85,7 +106,10 @@ class UnlockedWindow(QMainWindow):
         create_pass_db_dialog.exec()
 
         if create_pass_db_dialog.auto_saving_manager:
-            self.welcome_screen.new_window = UnlockedWindow(welcome_screen=self.welcome_screen, auto_saving_manager=create_pass_db_dialog.auto_saving_manager)
+            self.welcome_screen.new_window = UnlockedWindow(
+                welcome_screen=self.welcome_screen,
+                auto_saving_manager=create_pass_db_dialog.auto_saving_manager
+            )
             self.welcome_screen.new_window.show()
 
             self.close()
@@ -96,8 +120,10 @@ class UnlockedWindow(QMainWindow):
         open_pass_db_dialog.exec()
 
         if open_pass_db_dialog.auto_saving_manager:
-            self.welcome_screen.new_window = UnlockedWindow(welcome_screen=self.welcome_screen,
-                                                            auto_saving_manager=open_pass_db_dialog.auto_saving_manager)
+            self.welcome_screen.new_window = UnlockedWindow(
+                welcome_screen=self.welcome_screen,
+                auto_saving_manager=open_pass_db_dialog.auto_saving_manager
+            )
             self.welcome_screen.new_window.show()
 
             self.close()
