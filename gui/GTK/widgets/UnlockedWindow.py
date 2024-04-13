@@ -5,6 +5,7 @@ from widgets.AboutAppDialog import build_about_app_dialog
 from widgets.AddPasswordDialog import build_add_password_dialog
 from widgets.CreatePassDBDialog import build_create_pass_db_dialog
 from widgets.OpenPassDBDialog import build_open_pass_db_dialog
+from widgets.PasswordDialog import build_password_dialog, STATES
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Gdk
@@ -58,7 +59,11 @@ def _on_show_button_pressed(button):
         row_number = path.get_indices()[0]
 
         password_entry_id = window.row_to_id[row_number]
-        print("Password entry id: ", password_entry_id)
+        password_dialog = build_password_dialog(password_entry=window.auto_saving_manager.passwords[password_entry_id], state=STATES.SHOWING)
+        password_dialog.run()
+
+        if password_dialog.add_update_password_entry is not None:
+            window.auto_saving_manager.update_password_entry(id=password_entry_id, password_entry=password_dialog.add_update_password_entry)
 
     reload_table_entries(window)
 
