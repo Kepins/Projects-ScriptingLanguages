@@ -4,8 +4,6 @@ from widgets.AboutAppDialog import build_about_app_dialog
 from widgets.CreatePassDBDialog import build_create_pass_db_dialog
 from widgets.OpenPassDBDialog import build_open_pass_db_dialog
 
-# from widgets.AboutAppDialog import AboutAppDialog
-
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Gdk
 
@@ -22,7 +20,13 @@ def _on_create_pass_db_pressed(widget):
     dialog = build_create_pass_db_dialog()
     dialog.run()
 
-    print(dialog.auto_saving_manager)
+    if not dialog.auto_saving_manager:
+        return
+
+    from widgets.UnlockedWindow import build_unlocked_window
+    win = build_unlocked_window(dialog.auto_saving_manager)
+    win.show_all()
+    widget.get_toplevel().destroy()
 
 
 def _on_open_pass_db_pressed(widget):
@@ -30,7 +34,13 @@ def _on_open_pass_db_pressed(widget):
     dialog = build_open_pass_db_dialog()
     dialog.run()
 
-    print(dialog.auto_saving_manager)
+    if not dialog.auto_saving_manager:
+        return
+
+    from widgets.UnlockedWindow import build_unlocked_window
+    win = build_unlocked_window(dialog.auto_saving_manager)
+    win.show_all()
+    widget.get_toplevel().destroy()
 
 
 def _on_close_app_pressed(widget):

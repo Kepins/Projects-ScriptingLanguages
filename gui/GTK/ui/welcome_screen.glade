@@ -7,7 +7,7 @@
     <property name="title" translatable="yes">Menedżer haseł</property>
     <property name="default-width">400</property>
     <property name="default-height">600</property>
-    <signal name="destroy" handler="on_close_app_pressed" swapped="no"/>
+    <signal name="destroy-event" handler="on_close_app_pressed" swapped="no"/>
     <child>
       <object class="GtkBox">
         <property name="visible">True</property>
