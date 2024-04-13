@@ -3,6 +3,7 @@ import gi
 from password_manager.manager import AutoSavingPasswordManager
 from widgets.AboutAppDialog import build_about_app_dialog
 from widgets.AddPasswordDialog import build_add_password_dialog
+from widgets.ChangeMasterPasswordDialog import build_change_master_password_dialog
 from widgets.CreatePassDBDialog import build_create_pass_db_dialog
 from widgets.ErrorDialog import build_error_dialog
 from widgets.OpenPassDBDialog import build_open_pass_db_dialog
@@ -71,14 +72,14 @@ def _on_show_button_pressed(button):
     reload_table_entries(window)
 
 
-def _on_about_app_pressed(widget):
+def _on_about_app_pressed(window):
     print("About app button clicked")
 
     about_dialog = build_about_app_dialog()
     about_dialog.run()
 
 
-def _on_create_pass_db_pressed(widget):
+def _on_create_pass_db_pressed(window):
     print("Create pass db button clicked")
     dialog = build_create_pass_db_dialog()
     dialog.run()
@@ -88,10 +89,10 @@ def _on_create_pass_db_pressed(widget):
 
     win = build_unlocked_window(dialog.auto_saving_manager)
     win.show_all()
-    widget.get_toplevel().destroy()
+    window.destroy()
 
 
-def _on_open_pass_db_pressed(widget):
+def _on_open_pass_db_pressed(window):
     print("Open pass db button clicked")
     dialog = build_open_pass_db_dialog()
     dialog.run()
@@ -101,7 +102,7 @@ def _on_open_pass_db_pressed(widget):
 
     win = build_unlocked_window(dialog.auto_saving_manager)
     win.show_all()
-    widget.get_toplevel().destroy()
+    window.destroy()
 
 
 def _on_save_as_pressed(window):
@@ -129,19 +130,27 @@ def _on_save_as_pressed(window):
     )
 
 
-def _on_change_master_password_pressed(widget):
+def _on_change_master_password_pressed(window):
     print("Change master password button clicked")
+    dialog = build_change_master_password_dialog()
+    dialog.run()
 
+    if not dialog.new_master_password:
+        return
 
-def _on_lock_pressed(widget):
+    window.auto_saving_manager.change_master_password(
+        new_master_password=dialog.new_master_password
+    )
+
+def _on_lock_pressed(window):
     print("Lock button clicked")
     from widgets.WelcomeWindow import build_welcome_window
     win = build_welcome_window()
     win.show_all()
-    widget.get_toplevel().destroy()
+    window.destroy()
 
 
-def _on_close_app_pressed(widget):
+def _on_close_app_pressed(window):
     print("Exit button clicked")
     Gtk.main_quit()
 

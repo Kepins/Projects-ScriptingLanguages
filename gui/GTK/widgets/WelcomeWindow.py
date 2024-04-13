@@ -8,14 +8,14 @@ gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Gdk
 
 
-def _on_about_app_pressed(widget):
+def _on_about_app_pressed(window):
     print("About app button clicked")
 
     about_dialog = build_about_app_dialog()
     about_dialog.run()
 
 
-def _on_create_pass_db_pressed(widget):
+def _on_create_pass_db_pressed(window):
     print("Create pass db button clicked")
     dialog = build_create_pass_db_dialog()
     dialog.run()
@@ -26,10 +26,10 @@ def _on_create_pass_db_pressed(widget):
     from widgets.UnlockedWindow import build_unlocked_window
     win = build_unlocked_window(dialog.auto_saving_manager)
     win.show_all()
-    widget.get_toplevel().destroy()
+    window.destroy()
 
 
-def _on_open_pass_db_pressed(widget):
+def _on_open_pass_db_pressed(window):
     print("Open pass db button clicked")
     dialog = build_open_pass_db_dialog()
     dialog.run()
@@ -40,7 +40,7 @@ def _on_open_pass_db_pressed(widget):
     from widgets.UnlockedWindow import build_unlocked_window
     win = build_unlocked_window(dialog.auto_saving_manager)
     win.show_all()
-    widget.get_toplevel().destroy()
+    window.destroy()
 
 
 def _on_close_app_pressed(widget):

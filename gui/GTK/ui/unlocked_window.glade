@@ -39,7 +39,7 @@
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
                         <property name="label" translatable="yes">Nowy</property>
-                        <signal name="activate" handler="on_create_pass_db_pressed" swapped="no"/>
+                        <signal name="activate" handler="on_create_pass_db_pressed" object="UnlockedWindow" swapped="no"/>
                       </object>
                     </child>
                     <child>
@@ -47,7 +47,7 @@
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
                         <property name="label" translatable="yes">Otwórz</property>
-                        <signal name="activate" handler="on_open_pass_db_pressed" swapped="no"/>
+                        <signal name="activate" handler="on_open_pass_db_pressed" object="UnlockedWindow" swapped="no"/>
                       </object>
                     </child>
                     <child>
@@ -63,7 +63,7 @@
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
                         <property name="label" translatable="yes">Zmień hasło główne</property>
-                        <signal name="activate" handler="on_change_master_password_pressed" swapped="no"/>
+                        <signal name="activate" handler="on_change_master_password_pressed" object="UnlockedWindow" swapped="no"/>
                       </object>
                     </child>
                     <child>
@@ -71,7 +71,7 @@
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
                         <property name="label" translatable="yes">Zablokuj</property>
-                        <signal name="activate" handler="on_lock_pressed" swapped="no"/>
+                        <signal name="activate" handler="on_lock_pressed" object="UnlockedWindow" swapped="no"/>
                       </object>
                     </child>
                     <child>
@@ -79,7 +79,7 @@
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
                         <property name="label" translatable="yes">Zamknij</property>
-                        <signal name="activate" handler="on_close_app_pressed" swapped="no"/>
+                        <signal name="activate" handler="on_close_app_pressed" object="UnlockedWindow" swapped="no"/>
                       </object>
                     </child>
                   </object>
@@ -91,7 +91,7 @@
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
                 <property name="label" translatable="yes">O aplikacji</property>
-                <signal name="activate" handler="on_about_app_pressed" swapped="no"/>
+                <signal name="activate" handler="on_about_app_pressed" object="UnlockedWindow" swapped="no"/>
               </object>
             </child>
           </object>
