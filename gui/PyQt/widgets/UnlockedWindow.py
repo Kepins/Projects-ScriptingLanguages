@@ -99,11 +99,10 @@ class UnlockedWindow(QMainWindow):
         password_dialog = PasswordDialog(state=PasswordDialog.STATES.SHOWING, password_entry=password_entry)
         password_dialog.exec()
 
-        if password_dialog.add_update_password_entry is not None:
-            self.auto_saving_manager.update_password_entry(
-                id=password_entry_id,
-                password_entry=password_dialog.add_update_password_entry
-            )
+        self.auto_saving_manager.update_password_entry(
+            id=password_entry_id,
+            password_entry=password_dialog.add_update_password_entry
+        )
 
         self.reload_table_entries()
 
@@ -147,7 +146,8 @@ class UnlockedWindow(QMainWindow):
         self.auto_saving_manager = AutoSavingPasswordManager(
             manager=self.auto_saving_manager.manager,
             file_path=file_path,
-            master_password=self.auto_saving_manager.master_password)
+            master_password=self.auto_saving_manager.master_password,
+        )
 
     def on_change_master_password_pressed(self):
         print("Change master password button clicked")
@@ -171,4 +171,3 @@ class UnlockedWindow(QMainWindow):
     def on_about_app_clicked(self):
         print("About app button clicked")
         self.about_app_dialog.exec()
-

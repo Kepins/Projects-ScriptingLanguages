@@ -24,17 +24,21 @@ class PasswordDialog(QDialog):
         loadUi("ui/password_dialog.ui", self)
 
         self.state = state
-        self.password_entry = password_entry
-        self.add_update_password_entry = None
-
-        self.name_line_edit.setText(password_entry.name)
-        self.username_line_edit.setText(password_entry.username)
-        self.password_line_edit.setText(password_entry.password)
+        self.add_update_password_entry = AddUpdatePasswordEntry(
+            name=password_entry.name,
+            username=password_entry.username,
+            password=password_entry.password
+        )
 
         self.change_state(state)
 
     def change_state(self, state: STATES):
+        self.name_line_edit.setText(self.add_update_password_entry.name)
+        self.username_line_edit.setText(self.add_update_password_entry.username)
+        self.password_line_edit.setText(self.add_update_password_entry.password)
+
         if state == self.STATES.SHOWING:
+            self.state = state
             self.setWindowTitle("Wyświetl")
             self.name_line_edit.setReadOnly(True)
             self.username_line_edit.setReadOnly(True)
@@ -43,6 +47,7 @@ class PasswordDialog(QDialog):
             self.save_button.hide()
             self.edit_button.show()
         if state == self.STATES.EDITING:
+            self.state = state
             self.setWindowTitle("Edytuj")
             self.name_line_edit.setReadOnly(False)
             self.username_line_edit.setReadOnly(False)
@@ -64,12 +69,9 @@ class PasswordDialog(QDialog):
         if not name or not username or not password:
             ErrorDialog(message="Wypełnij wszystkie pola!").exec()
             return
-        self.change_state(state=self.STATES.SHOWING)
         self.add_update_password_entry = AddUpdatePasswordEntry(name=name, username=username, password=password)
+        self.change_state(state=self.STATES.SHOWING)
 
     def on_cancel_button_pressed(self):
         print("Cancel button clicked")
         self.change_state(state=self.STATES.SHOWING)
-        self.name_line_edit.setText(self.password_entry.name)
-        self.username_line_edit.setText(self.password_entry.username)
-        self.password_line_edit.setText(self.password_entry.password)
