@@ -2,6 +2,7 @@ import gi
 
 from password_manager.manager import AutoSavingPasswordManager
 from widgets.AboutAppDialog import build_about_app_dialog
+from widgets.AddPasswordDialog import build_add_password_dialog
 from widgets.CreatePassDBDialog import build_create_pass_db_dialog
 from widgets.OpenPassDBDialog import build_open_pass_db_dialog
 
@@ -12,6 +13,12 @@ from gi.repository import Gtk, Gdk
 def _on_add_button_pressed(button):
     print("Add password entry button clicked")
     window = button.get_toplevel()
+
+    password_dialog = build_add_password_dialog()
+    password_dialog.run()
+
+    if password_dialog.add_update_password_entry is not None:
+        window.auto_saving_manager.add_password_entry(password_dialog.add_update_password_entry)
 
     reload_table_entries(window)
 
