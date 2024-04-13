@@ -76,7 +76,8 @@ class UnlockedWindow(QMainWindow):
         password_dialog = AddPasswordDialog()
         password_dialog.exec()
 
-        self.auto_saving_manager.add_password_entry(password_dialog.add_update_password_entry)
+        if password_dialog.add_update_password_entry is not None:
+            self.auto_saving_manager.add_password_entry(password_dialog.add_update_password_entry)
         self.reload_table_entries()
 
     def on_remove_button_pressed(self):
