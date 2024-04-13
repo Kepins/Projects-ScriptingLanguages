@@ -4,6 +4,7 @@ from password_manager.manager import AutoSavingPasswordManager
 from widgets.AboutAppDialog import build_about_app_dialog
 from widgets.AddPasswordDialog import build_add_password_dialog
 from widgets.CreatePassDBDialog import build_create_pass_db_dialog
+from widgets.ErrorDialog import build_error_dialog
 from widgets.OpenPassDBDialog import build_open_pass_db_dialog
 from widgets.PasswordDialog import build_password_dialog, STATES
 
@@ -62,8 +63,10 @@ def _on_show_button_pressed(button):
         password_dialog = build_password_dialog(password_entry=window.auto_saving_manager.passwords[password_entry_id], state=STATES.SHOWING)
         password_dialog.run()
 
-        if password_dialog.add_update_password_entry is not None:
-            window.auto_saving_manager.update_password_entry(id=password_entry_id, password_entry=password_dialog.add_update_password_entry)
+        window.auto_saving_manager.update_password_entry(
+            id=password_entry_id,
+            password_entry=password_dialog.add_update_password_entry
+        )
 
     reload_table_entries(window)
 
@@ -101,8 +104,29 @@ def _on_open_pass_db_pressed(widget):
     widget.get_toplevel().destroy()
 
 
-def _on_save_as_pressed(widget):
+def _on_save_as_pressed(window):
     print("Save as button clicked")
+
+    file_dialog = Gtk.FileChooserDialog(
+        "Wybierz Plik",
+        None,
+        Gtk.FileChooserAction.SAVE,
+        (Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL, Gtk.STOCK_SAVE, Gtk.ResponseType.OK))
+
+    response = file_dialog.run()
+    file_path = file_dialog.get_filename()
+    file_dialog.destroy()
+
+    if response != Gtk.ResponseType.OK or not file_path:
+        print("No file selected")
+        build_error_dialog(error_message="Nie wybrano pliku!").run()
+        return
+
+    window.auto_saving_manager = AutoSavingPasswordManager(
+        manager=window.auto_saving_manager.manager,
+        file_path=file_path,
+        master_password=window.auto_saving_manager.master_password,
+    )
 
 
 def _on_change_master_password_pressed(widget):
