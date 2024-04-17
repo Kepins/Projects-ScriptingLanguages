@@ -23,10 +23,16 @@
     </rect>
    </property>
    <property name="text">
-    <string>O aplikacji opis</string>
+    <string>Menedżer haseł to aplikacja umożliwiająca zapisanie haseł użytkownika wraz z emailem bądź nazwą użytkownika. Hasła zapisane są w pliku i chronione hasłem głównym.</string>
+   </property>
+   <property name="textFormat">
+    <enum>Qt::AutoText</enum>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
+   </property>
+   <property name="wordWrap">
+    <bool>true</bool>
    </property>
   </widget>
   <widget class="QPushButton" name="ok_button">
