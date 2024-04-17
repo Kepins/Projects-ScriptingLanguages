@@ -10,6 +10,11 @@ def _on_ok_button_pressed(button):
     dialog.destroy()
 
 
+def _on_delete_event(widget, event):
+    dialog = widget.get_toplevel()
+    dialog.destroy()
+
+
 def build_about_app_dialog():
     handlers = {
         "on_ok_button_pressed": _on_ok_button_pressed,
@@ -19,4 +24,7 @@ def build_about_app_dialog():
     builder.add_from_file("ui/about_application.glade")
     builder.connect_signals(handlers)
 
-    return builder.get_object("AboutAppDialog")
+    dialog = builder.get_object("AboutAppDialog")
+    dialog.connect("delete-event", _on_delete_event)
+
+    return dialog

@@ -48,12 +48,18 @@ def _on_close_app_pressed(widget):
     Gtk.main_quit()
 
 
+def _on_delete_event(widget, event):
+    print("Exit button clicked")
+    Gtk.main_quit()
+
+
 def build_welcome_window():
     handlers = {
         "on_about_app_pressed": _on_about_app_pressed,
         "on_create_pass_db_pressed": _on_create_pass_db_pressed,
         "on_open_pass_db_pressed": _on_open_pass_db_pressed,
         "on_close_app_pressed": _on_close_app_pressed,
+        "on_delete_event": _on_delete_event,
     }
 
     builder = Gtk.Builder()

@@ -155,6 +155,11 @@ def _on_close_app_pressed(window):
     Gtk.main_quit()
 
 
+def _on_delete_event(widget, event):
+    print("Exit button clicked")
+    Gtk.main_quit()
+
+
 def reload_table_entries(window):
     # Clear existing data in the tree view
     software_liststore = window.tree_view.get_model()
@@ -195,6 +200,7 @@ def build_unlocked_window(auto_saving_manager: AutoSavingPasswordManager):
         "on_change_master_password_pressed": _on_change_master_password_pressed,
         "on_lock_pressed": _on_lock_pressed,
         "on_close_app_pressed": _on_close_app_pressed,
+        "on_delete_event": _on_delete_event,
     }
 
     builder = Gtk.Builder()

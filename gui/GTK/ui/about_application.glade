@@ -43,7 +43,9 @@
           <object class="GtkLabel">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
-            <property name="label" translatable="yes">Opis aplikacji</property>
+            <property name="label" translatable="yes">Menedżer haseł to aplikacja umożliwiająca zapisanie haseł użytkownika wraz z emailem bądź nazwą użytkownika. Hasła zapisane są w pliku i chronione hasłem głównym.</property>
+            <property name="justify">center</property>
+            <property name="wrap">True</property>
           </object>
           <packing>
             <property name="expand">True</property>

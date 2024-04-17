@@ -15,7 +15,7 @@
     <property name="title" translatable="yes">Menedżer haseł</property>
     <property name="default-width">800</property>
     <property name="default-height">600</property>
-    <signal name="destroy-event" handler="on_close_app_pressed" swapped="no"/>
+    <signal name="delete-event" handler="on_delete_event" swapped="no"/>
     <child>
       <object class="GtkBox">
         <property name="visible">True</property>
@@ -123,9 +123,6 @@
                 <property name="visible">True</property>
                 <property name="can-focus">True</property>
                 <property name="model">liststore</property>
-                <child internal-child="selection">
-                  <object class="GtkTreeSelection"/>
-                </child>
               </object>
             </child>
           </object>
