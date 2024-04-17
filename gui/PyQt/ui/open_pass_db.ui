@@ -16,10 +16,10 @@
   <widget class="QPushButton" name="ok_button">
    <property name="geometry">
     <rect>
-     <x>240</x>
-     <y>260</y>
+     <x>310</x>
+     <y>261</y>
      <width>80</width>
-     <height>22</height>
+     <height>31</height>
     </rect>
    </property>
    <property name="text">
@@ -29,8 +29,8 @@
   <widget class="QLabel" name="master_password_label">
    <property name="geometry">
     <rect>
-     <x>28</x>
-     <y>100</y>
+     <x>150</x>
+     <y>140</y>
      <width>101</width>
      <height>16</height>
     </rect>
@@ -38,22 +38,25 @@
    <property name="text">
     <string>Hasło główne</string>
    </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
   </widget>
   <widget class="QLineEdit" name="master_password_input">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>120</y>
-     <width>301</width>
-     <height>51</height>
+     <x>10</x>
+     <y>160</y>
+     <width>381</width>
+     <height>31</height>
     </rect>
    </property>
   </widget>
   <widget class="QLabel" name="file_name_label">
    <property name="geometry">
     <rect>
-     <x>28</x>
-     <y>20</y>
+     <x>150</x>
+     <y>70</y>
      <width>101</width>
      <height>16</height>
     </rect>
@@ -61,14 +64,17 @@
    <property name="text">
     <string>Plik</string>
    </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
   </widget>
   <widget class="QLineEdit" name="file_name_input">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>40</y>
-     <width>301</width>
-     <height>51</height>
+     <x>10</x>
+     <y>90</y>
+     <width>291</width>
+     <height>31</height>
     </rect>
    </property>
    <property name="readOnly">
@@ -78,10 +84,10 @@
   <widget class="QPushButton" name="select_file_button">
    <property name="geometry">
     <rect>
-     <x>230</x>
-     <y>60</y>
+     <x>310</x>
+     <y>90</y>
      <width>80</width>
-     <height>22</height>
+     <height>31</height>
     </rect>
    </property>
    <property name="text">

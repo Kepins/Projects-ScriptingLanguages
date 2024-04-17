@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>349</width>
-    <height>348</height>
+    <width>400</width>
+    <height>300</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,10 +16,10 @@
   <widget class="QPushButton" name="ok_button">
    <property name="geometry">
     <rect>
-     <x>240</x>
-     <y>230</y>
-     <width>80</width>
-     <height>22</height>
+     <x>309</x>
+     <y>261</y>
+     <width>81</width>
+     <height>31</height>
     </rect>
    </property>
    <property name="text">
@@ -29,24 +29,27 @@
   <widget class="QLineEdit" name="master_password_input">
    <property name="geometry">
     <rect>
-     <x>22</x>
-     <y>60</y>
-     <width>301</width>
-     <height>51</height>
+     <x>10</x>
+     <y>130</y>
+     <width>381</width>
+     <height>31</height>
     </rect>
    </property>
   </widget>
   <widget class="QLabel" name="master_password_label">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>40</y>
+     <x>150</x>
+     <y>100</y>
      <width>101</width>
      <height>16</height>
     </rect>
    </property>
    <property name="text">
     <string>Hasło główne</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
    </property>
   </widget>
  </widget>

@@ -74,6 +74,7 @@ def build_open_pass_db_dialog():
     dialog.connect("delete-event", _on_delete_event)
 
     dialog.auto_saving_manager = None
+    dialog.file_path = None
     dialog.master_password_entry = builder.get_object("master_password_entry")
     dialog.file_name_entry = builder.get_object("file_name_entry")
 

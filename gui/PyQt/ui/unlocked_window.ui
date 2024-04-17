@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>835</width>
+    <width>800</width>
     <height>600</height>
    </rect>
   </property>
@@ -17,33 +17,36 @@
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>380</x>
-      <y>20</y>
-      <width>51</width>
-      <height>16</height>
+      <x>10</x>
+      <y>10</y>
+      <width>781</width>
+      <height>20</height>
      </rect>
     </property>
     <property name="text">
      <string>Hasła</string>
     </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
    </widget>
    <widget class="QTableWidget" name="tableWidget">
     <property name="geometry">
      <rect>
-      <x>80</x>
-      <y>60</y>
-      <width>661</width>
-      <height>391</height>
+      <x>10</x>
+      <y>30</y>
+      <width>781</width>
+      <height>481</height>
      </rect>
     </property>
    </widget>
    <widget class="QPushButton" name="add_button">
     <property name="geometry">
      <rect>
-      <x>570</x>
-      <y>480</y>
+      <x>710</x>
+      <y>520</y>
       <width>80</width>
-      <height>22</height>
+      <height>31</height>
      </rect>
     </property>
     <property name="text">
@@ -53,10 +56,10 @@
    <widget class="QPushButton" name="remove_button">
     <property name="geometry">
      <rect>
-      <x>660</x>
-      <y>480</y>
+      <x>620</x>
+      <y>521</y>
       <width>80</width>
-      <height>22</height>
+      <height>31</height>
      </rect>
     </property>
     <property name="text">
@@ -66,10 +69,10 @@
    <widget class="QPushButton" name="show_button">
     <property name="geometry">
      <rect>
-      <x>480</x>
-      <y>480</y>
+      <x>530</x>
+      <y>521</y>
       <width>80</width>
-      <height>22</height>
+      <height>31</height>
      </rect>
     </property>
     <property name="text">
@@ -82,7 +85,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>835</width>
+     <width>800</width>
      <height>19</height>
     </rect>
    </property>
