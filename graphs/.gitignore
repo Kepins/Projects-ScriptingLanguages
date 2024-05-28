@@ -1,0 +1,8 @@
+build
+dist
+__pycache__
+simple_graphs.egg-info
+venv
+.idea
+.vscode
+graphs.zip
